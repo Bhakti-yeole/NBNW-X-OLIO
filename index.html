@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBNW X OLIO</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  rel="stylesheet"
+/> 
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Raleway:wght@500&display=swap" rel="stylesheet">
+  <style>
+
+
+
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #333;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+   
+
+       /* Logo Styling */
+	   .logo-container {
+            position: absolute;
+			
+            top: 80%; /* Center vertically relative to the navbar */
+            left: 60%; /* Center horizontally */
+            transform: translate(-50%, -50%);
+            z-index: 8; /* Ensure it overlaps the navbar and carousel */
+        }
+
+        .logo-container img {
+            height: 250px; /* Adjust height to make it larger */
+            object-fit: contain;
+        }
+    body {
+      font-family: 'Raleway', sans-serif;
+      background-color: #fdfdf5; /* Matches soft cream background */
+      overflow-x: hidden;
+    }
+    .navbar {
+      background-color: transparent;
+      border-bottom: 1px solid #eaeaea;
+    }
+    .navbar-nav {
+      gap: 20px;
+    }
+    .navbar-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .company-name {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .carousel-item img {
+      height: 100%;
+      object-fit: cover;
+    }
+    .nav-item a {
+      color: #000;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .nav-item a:hover {
+      text-decoration: underline;
+    }
+    .icon {
+      font-size: 18px;
+      color: #000;
+      margin-left: 10px;
+    }
+    /* Categories Section */
+    .categories {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .categories h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #222;
+      margin-bottom: 30px;
+    }
+	.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Defines 4 columns */
+    gap: 30px; /* Space between grid items */
+    margin-top: 20px; /* Top margin */
+}
+
+    .category-item {
+      text-align: center;
+      opacity: 0; /* Start invisible for animation */
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+    .category-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .category-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .category-item h5 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-top: 10px;
+      color: #444;
+      letter-spacing: 1px;
+    }
+
+.text-center {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    width: 300px;
+    height: 439px; /* Set a fixed height to ensure uniform size */
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+    overflow: hidden; /* Ensures no overflow beyond the card boundaries */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Align content properly */
+}
+
+.product-card img {
+    width: 100%; /* Makes the image fit the card's width */
+    height: auto; /* Maintains aspect ratio */
+    max-height: 320px; /* Restricts height for uniformity */
+    object-fit: cover; /* Ensures the image fills the area without distortion */
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 5px;
+    left: 286px;
+    width: 65%;
+    height: 107%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 80px;
+    border-radius: 10px;
+    max-width: 1000px; /* Increased width */
+    width: 100%; /* Ensure responsiveness */
+    height: auto; /* Adjust height automatically */
+    max-height: 93%; /* Restrict the maximum height */
+    overflow-y: auto; /* Add scrolling for overflowing content */
+    position: relative;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    background: #ddd;
+    border-radius: 50%;
+    padding: 2px 8px;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.product-details .info {
+    text-align: left;
+}
+/* Section Styling */
+.features-section {
+  background-image: url('img/bg.png'); /* Replace with your image path */
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #fff; /* Text color for contrast */
+}
+
+/* Container */
+.container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Feature Box */
+.feature {
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Icons */
+.feature-icon {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: #ffd700; /* Gold color for icons */
+}
+
+/* Headings */
+.feature h3 {
+  font-size: 20px;
+  margin: 10px 0;
+  text-transform: uppercase;
+}
+
+/* Paragraphs */
+.feature p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+    /* Navigation Section */
+    .navigation-options {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin: 20px 0;
+    }
+
+    .nav-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 16px;
+        color: #333; /* Adjust color if needed */
+    }
+
+    .nav-option p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    /* Custom NBNW x OLIO Logo */
+    .custom-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #333;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+
+    /* Best Sale Icon */
+    .nav-option i {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 24px;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center">
+      <!-- Left Aligned Navbar Links -->
+      <ul class="navbar-nav me-auto d-flex flex-row align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Festive</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Bestsellers</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Clearance Sale</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+      </ul>
+      <!-- Center-Aligned Company Name -->
+	  <div class="logo-container">
+        <img src="img\text-to-image-removebg-preview.png" alt="Logo">
+    </div>
+      <!-- Right-Aligned Navbar Links -->
+      <ul class="navbar-nav ms-auto d-flex flex-row align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#">Log In</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Search</a></li>
+        <li class="nav-item"><span class="icon bi bi-bag"></span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Carousel -->
+  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img\DSC_2626[1].JPG" class="d-block w-100" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="img\Bold & Colorful Prints For You 3.png" class="d-block w-100" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="img/ss3.png" class="d-block w-100" alt="Slide 2">
+      </div>
+    
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Categories Section -->
+  <section class="categories">
+    <h2>8 Categories</h2>
+    <div class="category-grid">
+      <div class="category-item">
+        <img src="img\DSC_2441.JPG" alt="Neck Jewellery">
+        <h5>Neck Jewellery</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2416.JPG" alt="Halter Neck Tie-Up Top">
+        <h5>Halter Neck Tie-Up Top</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2406.JPG" alt="Body Jewellery">
+        <h5>Body Jewellery</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2409.JPG" alt="Earrings">
+        <h5>Earrings</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2408.JPG" alt="Waistchain">
+        <h5>Waistchain</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2415.JPG" alt="Protect Your Spirit Tee">
+        <h5>Protect Your Spirit Tee</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2414.JPG" alt="Lava Tye Dye Saree">
+        <h5>Lava Tye Dye Saree</h5>
+      </div>
+      <div class="category-item">
+        <img src="img\IMG_2413.JPG" alt="Wrist Band">
+        <h5>Wrist Band</h5>
+      </div>
+    </div>
+  </section>
+  <section class="features-section">
+	<div class="container">
+	  <div class="feature">
+		<i class="fas fa-eye feature-icon"></i>
+		<h3>MODERN HEIRLOOMS</h3>
+		<p>Each piece is unique and made in limited quantities.</p>
+	  </div>
+	  <div class="feature">
+		<i class="fas fa-hands feature-icon"></i>
+		<h3>HANDCRAFTED</h3>
+		<p>All our pieces are handcrafted by expert craftsmen.</p>
+	  </div>
+	  <div class="feature">
+		<i class="fas fa-leaf feature-icon"></i>
+		<h3>SUSTAINABLE</h3>
+		<p>Both brands prioritize ethical production and sustainability.</p>
+	  </div>
+	</div>
+  </section>
+  
+
+      <!-- Product Gallery Section -->
+	  <section class="product-gallery">
+		<h2 class="text-center">Bestsellers</h2>
+    <div class="navigation-options">
+      <!-- Navigation Options with Font Awesome -->
+      <div class="nav-option">
+        <div class="custom-logo">NBNW x OLIO</div>
+        <p>Home</p>
+    </div>
+      <div class="nav-option">
+          <i class="fas fa-tags"></i>
+          <p>Best Sale</p>
+      </div>
+  </div>
+		<div class="container">
+			<!-- Product Cards -->
+			<div class="product-card" onclick="showProductDetails('product1-modal')">
+				<img src="img/DSC_2520.JPG" alt="Product 1">
+				<h3>LAVA TYE DYE SAREE
+        </h3>
+				<p>₹12,500</p>
+			</div>
+			<div class="product-card" onclick="showProductDetails('product2-modal')">
+				<img src="img/DSC_2569.JPG" alt="Product 2">
+				<h3>PROTECT YOUR SPRIT TEE</h3>
+				<p>₹3,999</p>
+			</div>
+			<div class="product-card" onclick="showProductDetails('product3-modal')">
+				<img src="img/DSC_2490.JPG" alt="Product 3">
+				<h3> HALTER NECK TIEUP TOP
+        </h3>
+				<p>₹3,999</p>
+			</div>
+		</div>
+	</section>
+	
+	<!-- Modal for Product 1 -->
+	<div id="product1-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<div class="product-details">
+				<div id="product1-carousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="img/DSC_2520.JPG" class="d-block w-100" alt="Front View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2534.JPG" class="d-block w-100" alt="Side View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2535.JPG" class="d-block w-100" alt="Left View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2667.JPG" class="d-block w-100" alt="Close-up">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#product1-carousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#product1-carousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				<div class="info">
+					<h3>LAVA TYE DYE SAREE</h3>
+					<p><strong>Price:</strong> ₹12,500</p>
+					<p><strong>Sizes:</strong> XS, S, M, L, XL, 2X, 3X</p>
+					<p><strong>Colors:</strong> Black, Red, Orange, Yellow</p>
+					<p>Welcome to the satin saree of our tie dye dreams. To stay cutesy it can be styled with a tee or if demure is the vibe an elegant blouse of your choice. Hand tie dyed by our team of Delhi artisans. It's celebration time and this lava saree is our offering to you. Cause we love a full look, our Tie Dye Saree comes with a chilly red crop blouse, cause that is how we do (always and forever ❤️‍🔥).
+          </p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal for Product 2 -->
+	<div id="product2-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<div class="product-details">
+				<div id="product2-carousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="img/DSC_2569.JPG" class="d-block w-100" alt="Front View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2559.JPG" class="d-block w-100" alt="Side View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2563.JPG" class="d-block w-100" alt="Left View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2580.JPG" class="d-block w-100" alt="Close-up">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#product2-carousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#product2-carousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				<div class="info">
+					<h3>PROTECT YOUR SPRIT TEE</h3>
+					<p><strong>Price:</strong> ₹3,999</p>
+					<p><strong>Sizes:</strong> XS, S, M, L, XL, 2X, 3X</p>
+					
+					<p>To be alive is to experience an infinite spectrum of feelings. A tightrope walk between our inner and outer worlds as we strive to protect the most essential part of ourselves--our 'spirit'. There is no earthly scale to measure a navigation that is never seen, but always felt. Only opportunities to reflect the private maps we draw for ourselves through expressions. Something that might serve as either armour or reminder for others. Introducing our newest version of the PROTECT YOUR SPIRIT organic Cotton tee made in the spirit of protecting your soul on the streets with armour like none other.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal for Product 3 -->
+	<div id="product3-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<div class="product-details">
+				<div id="product3-carousel" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<img src="img/DSC_2490.JPG" class="d-block w-100" alt="Front View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2454.JPG" class="d-block w-100" alt="Side View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2458.JPG" class="d-block w-100" alt="Left View">
+						</div>
+						<div class="carousel-item">
+							<img src="img/DSC_2482.JPG" class="d-block w-100" alt="Close-up">
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#product3-carousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#product3-carousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				<div class="info">
+					<h3> HALTER NECK TIEUP TOP		</h3>
+					<p><strong>Price:</strong> ₹3,999</p>
+					<p><strong>Sizes:</strong> XS, S, M, L, XL, 2X, 3X</p>
+					
+					<p>Bringing in the HALTER NECK TIE-UP TOP, so classic it's hard to resist, featuring halter neck this time!! The fitted yet stretchable top that is perfect to play any and all parts sultry & sharp all in one. Tailored in a sturdy, stretchable Satin for the chills. Each panel is firsthand folded into a square, both ends of which are dip dyed simultaneously to achieve the beautiful merge of colors. It is then tied at intervals and resist dyed to keep the original colors at the ties. Finally, the top is structured from single fabric with multiple color carefully brought together. You know the drill, this is so special with no joining, single piece with no stitch.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function showProductDetails(modalId) {
+			document.getElementById(modalId).style.display = "block";
+		}
+	
+		function closeModal() {
+			document.querySelectorAll(".modal").forEach(modal => modal.style.display = "none");
+		}
+	</script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Intersection Observer for Animation -->
+  <script>
+    const items = document.querySelectorAll('.category-item');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    });
+
+    items.forEach(item => observer.observe(item));
+  </script>
+  <!-- <script>
+// 	function showProductDetails(productId) {
+//     const modal = document.getElementById('product-modal');
+//     modal.style.display = 'flex';
+
+//     // Populate modal content based on productId
+//     if (productId === 'product1') {
+//         document.getElementById('product-name').innerText = 'Lava Tye Dye Saree';
+//         document.getElementById('product-price').innerText = '12,500';
+//         document.getElementById('product-description').innerText =
+//             'Welcome to the satin saree of our tie-dye dreams. To stay cutesy, it can be styled with a tee or an elegant blouse of your choice.';
+//     } else if (productId === 'product2') {
+//         document.getElementById('product-name').innerText = 'Ocean Breeze Saree';
+//         document.getElementById('product-price').innerText = '14,000';
+//         document.getElementById('product-description').innerText =
+//             'Hand-dyed and perfect for any occasion. This saree brings the ocean breeze to your wardrobe.';
+//     } else if (productId === 'product3') {
+//         document.getElementById('product-name').innerText = 'Sunset Glow Saree';
+//         document.getElementById('product-price').innerText = '10,500';
+//         document.getElementById('product-description').innerText =
+//             'Vibrant hues and luxurious fabric make this saree a timeless piece.';
+//     }
+// }
+
+// function closeModal() {
+//     const modal = document.getElementById('product-modal');
+//     modal.style.display = 'none';
+// }
+
+  </script> -->
+  <!-- <script>
+	function showProductDetails(productId) {
+    const modal = document.getElementById('product-modal');
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('product-modal');
+    modal.style.display = 'none';
+}
+
+  </script> -->
+</body>
+</html>
